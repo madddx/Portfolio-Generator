@@ -1,0 +1,78 @@
+/* Blueprint — an engineer's drafting sheet. Square corners, a faint grid behind everything,
+   and every section title drawn as a dimension line with end ticks. Light = vellum, dark = classic blueprint blue. */
+
+:root[data-style="blueprint"] {
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, Menlo, monospace;
+  --radius: 2px; --radius-sm: 2px; --radius-pill: 2px;
+  --card-pad: 1.35rem; --maxw: 1100px;
+}
+:root[data-style="blueprint"][data-mode="light"] {
+  --bg: #f4f8fc; --bg-alt: #f4f8fc; --surface: #ffffff; --surface-2: #e6eef8; --border: #a9bfdc;
+  --text: #1d2f4a; --text-2: #465c7c; --heading: #0a1c38;
+  --accent: #1556c4; --accent-ink: #ffffff;
+  --grid-minor: rgba(21, 86, 196, .07); --grid-major: rgba(21, 86, 196, .14);
+}
+:root[data-style="blueprint"][data-mode="dark"] {
+  --bg: #0c2a52; --bg-alt: #0c2a52; --surface: #103466; --surface-2: #153d75; --border: #4a76b4;
+  --text: #dbe7f7; --text-2: #a9c1e2; --heading: #ffffff;
+  --accent: #ffd35a; --accent-ink: #0a1c38;
+  --grid-minor: rgba(255, 255, 255, .06); --grid-major: rgba(255, 255, 255, .13);
+}
+
+/* The sheet: minor grid every 24px, major every 120px */
+[data-style="blueprint"] body {
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px), linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-minor) 1px, transparent 1px), linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  background-position: -1px -1px;
+}
+[data-style="blueprint"] .section:nth-of-type(even) { background: transparent; }
+[data-style="blueprint"] .site-nav { background: color-mix(in srgb, var(--bg) 92%, transparent); border-bottom: 1px solid var(--border); }
+
+/* Signature: section titles are dimension lines */
+[data-style="blueprint"] .sec-title { display: flex; align-items: center; gap: 1.1rem; font-size: clamp(1.5rem, 3.2vw, 2rem); font-weight: 600; letter-spacing: -.01em; }
+[data-style="blueprint"] .sec-title::after {
+  content: ''; flex: 1; height: 11px; min-width: 2rem;
+  background:
+    linear-gradient(var(--border), var(--border)) center / 100% 1px no-repeat,
+    linear-gradient(var(--border), var(--border)) left / 1px 100% no-repeat,
+    linear-gradient(var(--border), var(--border)) right / 1px 100% no-repeat;
+}
+
+/* Type details: figures and labels in mono, like annotations on a drawing */
+[data-style="blueprint"] .hero-name { font-weight: 700; letter-spacing: -.035em; }
+[data-style="blueprint"] .hero-role { font-family: var(--font-mono); font-weight: 400; font-size: clamp(1rem, 2vw, 1.2rem); }
+[data-style="blueprint"] .hero-kicker, [data-style="blueprint"] .tl-period, [data-style="blueprint"] .edu-period,
+[data-style="blueprint"] .hero-stats dt, [data-style="blueprint"] .ci-label, [data-style="blueprint"] .badge, [data-style="blueprint"] .tags li,
+[data-style="blueprint"] .pub-year, [data-style="blueprint"] .facts dt { font-family: var(--font-mono); }
+[data-style="blueprint"] .tags li { background: transparent; border: 1px solid var(--border); color: var(--text); font-weight: 400; }
+[data-style="blueprint"] .badge { color: var(--text); }
+[data-style="blueprint"] .hero-stats dd { font-weight: 600; }
+
+/* Hero photo sits in a drawn frame */
+[data-style="blueprint"] .hero-photo { border: 1px solid var(--border); outline: 1px solid var(--border); outline-offset: 8px; }
+[data-style="blueprint"] .hero-photo--mono { background: var(--surface); }
+
+/* Cards: flat, ruled, square */
+[data-style="blueprint"] .proj-card, [data-style="blueprint"] .edu-item, [data-style="blueprint"] .cert-card, [data-style="blueprint"] .award,
+[data-style="blueprint"] .link-card, [data-style="blueprint"] .pub, [data-style="blueprint"] .contact-form, [data-style="blueprint"] .chip { background: var(--surface); }
+[data-style="blueprint"] .proj-card:hover, [data-style="blueprint"] a.cert-card:hover, [data-style="blueprint"] a.link-card:hover { border-color: var(--accent-text); }
+[data-style="blueprint"] .proj-img { border-bottom: 1px solid var(--border); }
+[data-style="blueprint"] .edu-logo, [data-style="blueprint"] .cert-logo { border-radius: 0; }
+
+/* Timeline: a dashed construction line with square nodes */
+[data-style="blueprint"] .timeline { border-left: 1px dashed var(--border); }
+[data-style="blueprint"] .tl-item::before { left: calc(-1.6rem - 6px); width: 11px; height: 11px; border-radius: 0; background: var(--bg); border: 2px solid var(--accent-text); box-shadow: none; }
+[data-style="blueprint"] .section:nth-of-type(even) .tl-item::before { box-shadow: none; }
+[data-style="blueprint"] .tl-bullets li::before { border-radius: 0; background: var(--accent-text); width: .3rem; height: .3rem; }
+
+/* Buttons and icons */
+[data-style="blueprint"] .btn { font-weight: 600; }
+[data-style="blueprint"] .btn--primary { box-shadow: 4px 4px 0 var(--border); }
+[data-style="blueprint"] .btn--primary:hover { filter: none; transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--border); }
+[data-style="blueprint"] .brand-mark { border-radius: 0; }
+[data-style="blueprint"] .link-icon, [data-style="blueprint"] .ci-icon { background: transparent; border: 1px solid var(--border); }
+[data-style="blueprint"] .site-footer { border-top: 1px solid var(--border); background: transparent; font-family: var(--font-mono); font-size: .82rem; }

@@ -1,0 +1,24 @@
+{
+  "id": "blueprint",
+  "name": "Blueprint",
+  "blurb": "Drafting-sheet precision. Graph-paper background, ruled cards and every title drawn like a dimension line.",
+  "released": "2026-11-22",
+  "order": 100,
+  "fonts": "family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500",
+  "accent": {
+    "light": "#1556c4",
+    "dark": "#ffd35a"
+  },
+  "swatch": {
+    "light": [
+      "#f4f8fc",
+      "#0a1c38",
+      "#1556c4"
+    ],
+    "dark": [
+      "#0c2a52",
+      "#ffffff",
+      "#ffd35a"
+    ]
+  }
+}
