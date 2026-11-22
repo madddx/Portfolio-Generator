@@ -11,7 +11,7 @@ const watch = (page, tag) => { page.on('pageerror', e => { errors.push(tag + ' p
 
 // ── 1. generator ──────────────────────────────────────────────────────────
 const gen = await ctx.newPage(); watch(gen, 'gen');
-await gen.goto('file://' + path.resolve('dist/index.html')); await gen.waitForSelector('.ed-nav');
+await gen.goto('file://' + path.resolve('dist/generate.html')); await gen.waitForSelector('.ed-nav');
 const pv = gen.frameLocator('iframe.pv-frame');
 await gen.fill('input[placeholder="Jane Doe"]', 'Test Person'); await gen.fill('input[placeholder="Full-stack developer"]', 'Backend engineer');
 await pv.locator('.hero-name').waitFor(); await gen.waitForTimeout(400);

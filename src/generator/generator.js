@@ -77,6 +77,8 @@ window.PFCatalog.ready(function () {
   // ── editor + preview ───────────────────────────────────────────────────
   var draft = loadDraft(), preview, api;
   var startData = draft || PF.emptyData();
+  var hashStyle = (location.hash.match(/style=([\w-]+)/) || [])[1];   // arrived from a theme card on the landing page
+  if (hashStyle && PF.STYLES.some(function (s) { return s.id === hashStyle; })) startData.design.style = hashStyle;
 
   function copyOf(d) { return JSON.parse(JSON.stringify(d)); }
   function replaceAll(nd, msg) {
@@ -132,6 +134,7 @@ window.PFCatalog.ready(function () {
     standalone: function () { return inlineDoc(PF.normalize(api.getData())); }
   });
 
+  if (/#update/.test(location.hash)) setTimeout(function () { api.toast('Choose Project → Open my site (.zip) to load the site you made before.'); }, 400);
   if (draft) setStatus('Draft restored from this browser'); else setStatus('Nothing yet. Start with your name.');
 
   // ── top bar ────────────────────────────────────────────────────────────

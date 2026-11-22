@@ -1,4 +1,4 @@
-// Builds everything into dist/:  index.html (the generator, ONE file)  and  gallery.html (all themes side by side).
+// Builds everything into dist/:  index.html (landing page), generate.html (the generator, ONE file), gallery.html (all themes side by side), favicon files, themes/index.json.
 // Also assembles build/site/ — the website template — which the tests use.
 import fs from 'node:fs'; import path from 'node:path';
 import { checkAll } from './tools/check-themes.mjs';
@@ -27,8 +27,10 @@ for (const t of themes) W(`build/site/css/themes/${t.meta.id}.css`, t.css);
 const templates = { 'index.html': R('build/site/index.html'), 'css/base.css': R('build/site/css/base.css'), 'js/schema.js': R('build/site/js/schema.js'), 'js/renderer.js': R('build/site/js/renderer.js') };
 for (const t of themes) templates[`css/themes/${t.meta.id}.css`] = t.css;
 
+const svgIcon = R('src/brand/favicon.svg').trim(), png32 = fs.readFileSync('src/brand/favicon-32.png').toString('base64');
+const favicon = `<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,${Buffer.from(svgIcon).toString('base64')}">\n<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,${png32}">\n<link rel="apple-touch-icon" href="apple-touch-icon.png">`;
 const css = '<style>' + R('src/editor/tool.css') + '</style>';
-const common = { 'tool.css': css, 'schema.js': tag(templates['js/schema.js']), 'editor.js': tag(R('src/editor/editor.js')), 'preview.js': tag(R('src/editor/preview.js')),
+const common = { favicon, favicon64: Buffer.from(svgIcon).toString('base64'), 'tool.css': css, 'schema.js': tag(templates['js/schema.js']), 'editor.js': tag(R('src/editor/editor.js')), 'preview.js': tag(R('src/editor/preview.js')),
   'sample.js': tag(R('src/generator/sample.js')), 'assemble.js': tag(R('src/generator/assemble.js')), 'catalog.js': tag(R('src/generator/catalog.js')), 'templates': '<script>window.PF_TEMPLATES=' + jsonInScript(templates) + ';</script>' };
 
 // 4. admin.html (ships inside every generated site; schema + data load from beside it)
@@ -38,9 +40,12 @@ common['templates'] = '<script>window.PF_TEMPLATES=' + jsonInScript(templates) +
 // 5. generator + gallery
 fs.mkdirSync('dist', { recursive: true });
 const gen = fill(R('src/generator/generator.html'), { ...common, jszip: tag(R('node_modules/jszip/dist/jszip.min.js')), 'generator.js': tag(R('src/generator/generator.js')) });
-W('dist/index.html', gen);
+W('dist/generate.html', gen);
 const gal = fill(R('src/gallery/gallery.html'), { ...common, 'gallery.js': tag(R('src/gallery/gallery.js')) });
 W('dist/gallery.html', gal);
+const land = fill(R('src/landing/landing.html'), { ...common, 'landing.js': tag(R('src/landing/landing.js')) });
+W('dist/index.html', land);
+for (const f of ['favicon.svg', 'apple-touch-icon.png']) fs.copyFileSync('src/brand/' + f, 'dist/' + f);
 // 6. the hosted catalog: dist/themes/index.json (everything the generator needs to offer every theme in this folder)
 W('dist/themes/index.json', JSON.stringify({ generated: new Date().toISOString(), themes: themes.map((t, i) => ({ ...styles[i], css: t.css })) }));
-console.log(`built ${themes.length} themes → dist/index.html ${(gen.length / 1024).toFixed(0)} KB · dist/gallery.html ${(gal.length / 1024).toFixed(0)} KB · admin.html ${(templates['admin.html'].length / 1024).toFixed(0)} KB`);
+console.log(`built ${themes.length} themes → dist/index.html ${(land.length / 1024).toFixed(0)} KB · dist/generate.html ${(gen.length / 1024).toFixed(0)} KB · dist/gallery.html ${(gal.length / 1024).toFixed(0)} KB · admin.html ${(templates['admin.html'].length / 1024).toFixed(0)} KB`);

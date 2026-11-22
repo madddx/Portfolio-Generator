@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generate It!</title>
+<meta name="description" content="Make your own portfolio website in about ten minutes. Add your details, pick a style, download a site that is ready to publish. Free, no account.">
+<!--@favicon-->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&display=swap">
+<!--@tool.css-->
+<style>
+  html, body { height: auto; }
+  body { overflow-x: hidden; }
+  :root { --display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif; --pad: clamp(1.1rem, 4vw, 2.5rem); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--pad); }
+  .l-top { display: flex; align-items: center; gap: 1rem; padding: 1.1rem 0; }
+  .l-brand { display: flex; align-items: center; gap: .6rem; font: 800 1.2rem var(--display); letter-spacing: -.02em; color: var(--text); text-decoration: none; }
+  .l-brand img { width: 30px; height: 30px; }
+  .l-top nav { margin-left: auto; display: flex; gap: .4rem 1.4rem; align-items: center; }
+  .l-top nav a:not(.btn) { color: var(--muted); text-decoration: none; font-weight: 500; }
+  .l-top nav a:not(.btn):hover { color: var(--text); }
+
+  /* hero */
+  .l-hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; padding: clamp(1.5rem, 5vw, 4rem) 0 clamp(2.5rem, 6vw, 5rem); }
+  .l-hero h1 { margin: 0; font: 800 clamp(2.4rem, 4.9vw, 4.1rem)/1 var(--display); letter-spacing: -.035em; text-wrap: balance; }
+  .l-hero h1 span { color: var(--accent); }
+  .l-lede { margin: 1.4rem 0 0; max-width: 34rem; font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: 1.55; color: var(--muted); }
+  .l-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
+  .l-cta .btn.lg { padding: .95rem 1.7rem; font-size: 1.05rem; border-radius: 10px; }
+  .l-cta .btn.primary { box-shadow: 0 10px 24px -10px var(--accent); }
+  .l-fine { margin-top: 1.1rem; color: var(--muted); font-size: .92rem; }
+
+  /* the live stage: the real site, changing style */
+  .stage { min-width: 0; }
+  .browser { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--panel); box-shadow: 0 30px 60px -30px rgba(20,30,80,.35), 0 2px 6px rgba(16,24,40,.06); }
+  .b-bar { display: flex; align-items: center; gap: .6rem; padding: .55rem .8rem; border-bottom: 1px solid var(--line); background: var(--panel-2); }
+  .b-dots { display: flex; gap: 5px; } .b-dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+  .b-url { flex: 1; min-width: 0; padding: .2rem .7rem; border-radius: 6px; background: var(--bg); color: var(--muted); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .b-view { position: relative; aspect-ratio: 16 / 11; background: var(--bg); overflow: hidden; }
+  .b-view iframe { position: absolute; left: 0; top: 0; width: 1280px; border: 0; transform-origin: 0 0; background: #fff; }
+  .picker { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; margin-top: 1rem; }
+  .picker button { padding: .35rem .8rem; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-size: 13px; font-weight: 600; color: var(--muted); }
+  .picker button:hover { color: var(--text); border-color: var(--accent); }
+  .picker button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .picker .seg { margin-left: auto; }
+
+  /* sections */
+  .l-sec { padding: clamp(2.5rem, 6vw, 4.5rem) 0; }
+  .l-sec h2 { margin: 0 0 .6rem; font: 800 clamp(1.8rem, 3.6vw, 2.6rem)/1.05 var(--display); letter-spacing: -.03em; }
+  .l-sub { margin: 0 0 2rem; max-width: 40rem; color: var(--muted); font-size: 1.05rem; }
+  .how { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; counter-reset: s; }
+  .how-step { counter-increment: s; padding: 1.4rem; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; }
+  .how-step::before { content: counter(s); display: grid; place-items: center; width: 2rem; height: 2rem; margin-bottom: 1rem; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font: 800 1rem var(--display); }
+  .how-step h3 { margin: 0 0 .4rem; font: 700 1.2rem var(--display); letter-spacing: -.01em; }
+  .how-step p { margin: 0; color: var(--muted); }
+
+  .themes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 1rem; }
+  @media (max-width: 520px) { .themes { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; } .theme b { padding: .6rem .7rem 0; font-size: .95rem; } .theme span.t-blurb { padding: .2rem .7rem .8rem; font-size: 12.5px; } }
+  .theme { display: grid; align-content: start; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; text-decoration: none; color: var(--text); transition: transform .15s, border-color .15s; }
+  .theme:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .theme svg { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--line); }
+  .theme b { display: flex; align-items: center; gap: .5rem; padding: .8rem 1rem 0; font: 700 1.05rem var(--display); }
+  .theme span.t-blurb { padding: .25rem 1rem 1rem; color: var(--muted); font-size: 13.5px; line-height: 1.45; }
+  .l-more { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; margin-top: 1.6rem; color: var(--muted); }
+
+  .l-end { margin: clamp(1.5rem, 4vw, 3rem) 0; padding: clamp(2rem, 5vw, 3.5rem); border-radius: 20px; background: var(--accent); color: var(--accent-ink); display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem 2rem; }
+  .l-end h2 { margin: 0; flex: 1 1 22rem; font: 800 clamp(1.8rem, 3.6vw, 2.6rem)/1.05 var(--display); letter-spacing: -.03em; }
+  .l-end .btn { background: var(--accent-ink); color: var(--accent); border-color: transparent; }
+  .l-foot { padding: 1.5rem 0 3rem; color: var(--muted); font-size: 13.5px; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
+  .l-foot a { color: inherit; }
+
+  @media (max-width: 900px) { .l-hero { grid-template-columns: 1fr; } .how { grid-template-columns: 1fr; } .picker .seg { margin-left: 0; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="l-top">
+    <a class="l-brand" href="index.html"><img src="data:image/svg+xml;base64,<!--@favicon64-->" alt="" width="30" height="30">Generate It!</a>
+    <nav><a href="gallery.html">All themes</a><a class="btn sm primary" href="generate.html">Start</a></nav>
+  </header>
+
+  <main>
+    <section class="l-hero">
+      <div>
+        <h1>Hi, welcome! Let’s generate <span>your portfolio.</span></h1>
+        <p class="l-lede">Tell us about you, pick a style, and download a website that is ready to put online. About ten minutes, nothing to install.</p>
+        <div class="l-cta">
+          <a class="btn primary lg" href="generate.html">Start generating</a>
+          <a class="btn lg" href="generate.html#update">I already have a site</a>
+        </div>
+        <p class="l-fine">Free. No account. Your photos and details stay in your browser.</p>
+      </div>
+      <div class="stage" aria-label="A portfolio changing between styles">
+        <div class="browser">
+          <div class="b-bar"><span class="b-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="b-url">yourname.com</span></div>
+          <div class="b-view" id="view"><iframe id="frame" title="Example portfolio" tabindex="-1"></iframe></div>
+        </div>
+        <div class="picker" id="picker"><div class="seg" id="mode" role="radiogroup" aria-label="Colour mode"></div></div>
+      </div>
+    </section>
+
+    <section class="l-sec" id="how">
+      <h2>Three steps. That’s it.</h2>
+      <p class="l-sub">No coding, no hosting jargon.</p>
+      <ol class="how" style="list-style:none;margin:0;padding:0">
+        <li class="how-step"><h3>Tell us about you</h3><p>Your name, school, work, projects and photos. Leave out anything you don’t have.</p></li>
+        <li class="how-step"><h3>Pick a style</h3><p>Choose a theme and light or dark mode, and watch your site change as you go.</p></li>
+        <li class="how-step"><h3>Download and publish</h3><p>You get a folder with your site and an editor page, so you can change things later without coming back here.</p></li>
+      </ol>
+    </section>
+
+    <section class="l-sec" id="more-themes">
+      <h2>Pick a look you like</h2>
+      <p class="l-sub" id="themes-sub">A new theme is added every week.</p>
+      <div class="themes" id="themes"></div>
+      <div class="l-more"><a class="btn" href="gallery.html">See every theme in full</a><span>Open one to start with that style.</span></div>
+    </section>
+
+    <section class="l-end">
+      <h2>Ready when you are.</h2>
+      <a class="btn lg" href="generate.html">Let’s generate it!</a>
+    </section>
+  </main>
+
+  <footer class="l-foot"><span>Generate It!</span><a href="generate.html#update">Change the theme of a site you already made</a><a href="gallery.html">Themes</a></footer>
+</div>
+<!--@schema.js-->
+<!--@sample.js-->
+<!--@assemble.js-->
+<!--@templates-->
+<!--@catalog.js-->
+<!--@landing.js-->
+</body>
+</html>

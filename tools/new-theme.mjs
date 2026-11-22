@@ -20,6 +20,6 @@ console.log(`Created themes/${id}/${from ? `  (started from ${from})` : ''}
 Next:
   1. Edit themes/${id}/theme.css       (colours first, then one signature move)
   2. Edit themes/${id}/theme.json      (blurb, fonts, accent + swatch colours)
-  3. npm run dev                        rebuilds on every save — keep dist/gallery.html open and refresh
+  3. npm run dev                        rebuilds on every save — keep dist/gallery.html (or dist/index.html) open and refresh
   4. npm run check-themes               must pass before you ship
   5. Set "released" in theme.json to the launch date, then npm run build and deploy dist/`);
