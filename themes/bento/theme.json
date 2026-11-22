@@ -1,0 +1,24 @@
+{
+  "id": "bento",
+  "name": "Bento",
+  "blurb": "A grid of colourful tiles in different sizes with a floating pill menu. Feels like a dashboard made just for you.",
+  "released": "2026-11-22",
+  "order": 100,
+  "fonts": "family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600",
+  "accent": {
+    "light": "#5b3df5",
+    "dark": "#a99dff"
+  },
+  "swatch": {
+    "light": [
+      "#e8eaf2",
+      "#0e0f1a",
+      "#5b3df5"
+    ],
+    "dark": [
+      "#08090d",
+      "#ffffff",
+      "#a99dff"
+    ]
+  }
+}

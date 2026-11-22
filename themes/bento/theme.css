@@ -1,0 +1,97 @@
+/* Bento — the whole page is a grid of tiles in different sizes, each section its own colour block,
+   with a floating pill for navigation. Nothing is a long column. */
+
+:root[data-style="bento"] {
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --radius: 22px; --radius-sm: 14px; --radius-pill: 999px;
+  --maxw: 1180px; --card-pad: 1.2rem; --nav-h: 58px;
+}
+:root[data-style="bento"][data-mode="light"] {
+  --bg: #e8eaf2; --bg-alt: #e8eaf2; --surface: #ffffff; --surface-2: #f1f2f8; --border: #d6d9e6;
+  --text: #25263a; --text-2: #55576c; --heading: #0e0f1a;
+  --accent: #5b3df5; --accent-ink: #ffffff;
+  --t1: #e4dfff; --t2: #d6f2e4; --t3: #ffe3d2; --t4: #d6e9ff;
+}
+:root[data-style="bento"][data-mode="dark"] {
+  --bg: #08090d; --bg-alt: #08090d; --surface: #14161d; --surface-2: #1c1f28; --border: #272a36;
+  --text: #d4d7e4; --text-2: #9ea2b8; --heading: #ffffff;
+  --accent: #a99dff; --accent-ink: #0d0a24;
+  --t1: #1d1a3d; --t2: #0f2a20; --t3: #301d14; --t4: #10233a;
+}
+
+/* ── the grid ── */
+[data-style="bento"] main { max-width: var(--maxw); margin: 14px auto 0; padding: 0 12px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 14px; grid-auto-flow: dense; }
+[data-style="bento"] .section { padding: clamp(1.3rem, 2.6vw, 2rem); background: var(--surface); border-radius: 30px; grid-column: span 12; min-width: 0; }
+[data-style="bento"] .section-inner { max-width: none; padding: 0; }
+[data-style="bento"] .sec-title { margin: 0 0 1.4rem; font-size: 1.3rem; font-weight: 700; letter-spacing: -.02em; }
+[data-style="bento"] .sec-title::before { content: ''; display: inline-block; width: .6em; height: .6em; margin-right: .55em; border-radius: 50%; background: var(--accent); vertical-align: .05em; }
+[data-style="bento"] .section--about { grid-column: span 7; background: var(--t1); }
+[data-style="bento"] .section--experience { grid-column: span 5; }
+[data-style="bento"] .section--skills { grid-column: span 8; background: var(--t2); }
+[data-style="bento"] .section--education { grid-column: span 4; background: var(--t3); }
+[data-style="bento"] .section--certifications, [data-style="bento"] .section--learning { grid-column: span 6; background: var(--t4); }
+[data-style="bento"] .section--publications, [data-style="bento"] .section--awards, [data-style="bento"] .section--links { grid-column: span 6; }
+[data-style="bento"] .section--awards { background: var(--t3); }
+[data-style="bento"] .section--links { background: var(--t2); }
+[data-style="bento"] .section--contact { background: var(--accent); color: var(--accent-ink); }
+@media (max-width: 960px) {
+  [data-style="bento"] .section { grid-column: span 12 !important; }
+}
+
+/* ── floating pill nav ── */
+[data-style="bento"] .site-nav { top: 12px; width: calc(100% - 24px); max-width: calc(var(--maxw) - 24px); margin: 12px auto 0; border: 1px solid var(--border); border-radius: 999px; background: color-mix(in srgb, var(--surface) 82%, transparent); box-shadow: 0 10px 30px -14px rgba(20, 20, 60, .3); }
+[data-style="bento"] .nav-inner { padding: 0 .6rem 0 .5rem; }
+[data-style="bento"] .brand-mark { border-radius: 50%; }
+[data-style="bento"] .nav-links a { padding: .4rem .8rem; border-radius: 999px; }
+[data-style="bento"] .nav-links a:hover, [data-style="bento"] .nav-links a[aria-current] { background: var(--surface-2); text-decoration: none; }
+[data-style="bento"] .site-nav.nav-compact .nav-links { top: calc(var(--nav-h) + 8px); border: 1px solid var(--border); border-radius: 22px; background: var(--surface); }
+[data-style="bento"] .btn { border-radius: 999px; }
+[data-style="bento"] .btn--primary:hover { filter: none; transform: translateY(-1px); }
+[data-style="bento"] .icon-btn { border-radius: 50%; border-color: transparent; background: var(--surface-2); }
+
+/* ── hero tile ── */
+[data-style="bento"] .hero { grid-column: span 12; padding: clamp(1.5rem, 3.4vw, 2.8rem); border-radius: 36px; background: radial-gradient(circle at 100% 0%, var(--t1), transparent 55%), radial-gradient(circle at 0% 100%, var(--t2), transparent 45%), var(--surface); }
+[data-style="bento"] .hero-inner { max-width: none; padding: 0; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+[data-style="bento"] .hero-name { font-size: clamp(2.6rem, 6.4vw, 5.2rem); font-weight: 800; letter-spacing: -.045em; line-height: .96; }
+[data-style="bento"] .hero-role { color: var(--accent-text); font-weight: 600; }
+[data-style="bento"] .hero-bio { color: var(--text); }
+[data-style="bento"] .badge { background: var(--surface); border-color: transparent; color: var(--heading); font-weight: 600; }
+[data-style="bento"] .hero-stats { gap: .6rem; }
+[data-style="bento"] .hero-stats div { min-width: 7rem; padding: .8rem 1.1rem; border-radius: 20px; background: var(--surface); }
+[data-style="bento"] .hero-stats dd { font-size: 1.7rem; font-weight: 800; letter-spacing: -.03em; }
+[data-style="bento"] .hero-photo { border-radius: 34px; aspect-ratio: 1; max-width: 400px; transform: rotate(2.5deg); box-shadow: 0 24px 50px -24px rgba(30, 20, 90, .5); border: 6px solid var(--surface); }
+[data-style="bento"] .hero-photo--mono { background: var(--accent); color: var(--accent-ink); }
+[data-style="bento"] .social { border-radius: 50%; border-color: transparent; background: var(--surface); }
+
+/* ── content inside tiles ── */
+[data-style="bento"] .proj-card, [data-style="bento"] .edu-item, [data-style="bento"] .cert-card, [data-style="bento"] .award,
+[data-style="bento"] .link-card, [data-style="bento"] .pub, [data-style="bento"] .chip { background: var(--surface); border-color: transparent; }
+[data-style="bento"] .section--projects .proj-card { background: var(--surface-2); border-radius: 24px; }
+[data-style="bento"] .proj-img { margin: 8px 8px 0; border-radius: 18px; }
+[data-style="bento"] .proj-body h3 { letter-spacing: -.02em; }
+[data-style="bento"] .tags li { background: var(--surface-2); color: var(--heading); font-weight: 500; }
+[data-style="bento"] .section--about .tags li, [data-style="bento"] .section--about .chip { background: var(--surface); }
+[data-style="bento"] .timeline { border-left-width: 0; padding-left: 0; gap: .8rem; }
+[data-style="bento"] .tl-item { padding: 1.1rem 1.2rem; border-radius: 20px; background: var(--surface-2); }
+[data-style="bento"] .tl-item::before { display: none; }
+[data-style="bento"] .tl-head { flex-direction: column; gap: .1rem; }
+[data-style="bento"] .tl-period { margin-left: 0; order: -1; font-size: .8rem; font-weight: 600; color: var(--accent-text); }
+[data-style="bento"] .tl-role { font-size: 1.1rem; letter-spacing: -.01em; }
+[data-style="bento"] .facts div { border-bottom-color: color-mix(in srgb, var(--heading) 12%, transparent); }
+[data-style="bento"] .cert-logo, [data-style="bento"] .edu-logo { border-radius: 12px; }
+[data-style="bento"] .link-icon, [data-style="bento"] .ci-icon { border-radius: 50%; background: var(--surface-2); }
+[data-style="bento"] .pub-year { color: var(--accent-text); }
+[data-style="bento"] .skill-group h3 { color: var(--heading); }
+[data-style="bento"] .site-footer { border: 0; margin-top: 14px; }
+
+/* contact tile is the accent colour */
+[data-style="bento"] .section--contact .sec-title, [data-style="bento"] .section--contact .sec-title::before { color: inherit; }
+[data-style="bento"] .section--contact .sec-title::before { background: var(--accent-ink); }
+[data-style="bento"] .section--contact a, [data-style="bento"] .section--contact .ci-label, [data-style="bento"] .section--contact .prose { color: inherit; }
+[data-style="bento"] .section--contact .ci-icon { background: color-mix(in srgb, var(--accent-ink) 18%, transparent); color: inherit; }
+[data-style="bento"] .section--contact .contact-form { background: var(--surface); color: var(--text); border: 0; border-radius: 24px; }
+[data-style="bento"] .section--contact .contact-form h3 { color: var(--heading); }
+[data-style="bento"] .section--contact .contact-form label { color: var(--text-2); }
+[data-style="bento"] .section--contact .contact-form input, [data-style="bento"] .section--contact .contact-form textarea { background: var(--surface-2); border-color: transparent; border-radius: 14px; }
+[data-style="bento"] .section--contact .contact-form .btn--primary { background: var(--accent); color: var(--accent-ink); }
