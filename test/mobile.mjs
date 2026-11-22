@@ -8,7 +8,7 @@ const bad = [];
 const STYLES = fs.readdirSync('themes').filter(d => !d.startsWith('_')); for (const style of STYLES) for (const mode of ['light', 'dark']) {
   data.design.style = style; data.design.mode = mode; fs.writeFileSync(root + '/portfolio-data.js', 'window.PORTFOLIO_DATA=' + JSON.stringify(data) + ';');
   const p = await ctx.newPage(); await p.goto(url + '/index.html'); await p.waitForSelector('.hero-name'); await p.waitForTimeout(500);
-  const over = await p.evaluate(() => { const w = innerWidth; const offenders = [...document.querySelectorAll('body *')].filter(e => e.getBoundingClientRect().right > w + 1 && !e.closest('.nav-links') && getComputedStyle(e).position !== 'fixed').slice(0, 3).map(e => e.className || e.tagName); return { d: document.documentElement.scrollWidth - w, offenders }; });
+  const over = await p.evaluate(() => { const w = innerWidth; const offenders = [...document.querySelectorAll('body *')].filter(e => e.getBoundingClientRect().right > w + 1 && !e.closest('.nav-links') && !(function(n){ for (n = n.parentElement; n && n !== document.body; n = n.parentElement) { var o = getComputedStyle(n).overflowX; if (o === 'auto' || o === 'scroll') return true; } return false; })(e) && getComputedStyle(e).position !== 'fixed').slice(0, 3).map(e => e.className || e.tagName); return { d: document.documentElement.scrollWidth - w, offenders }; });
   if (over.d > 0 || over.offenders.length) bad.push(`${style}/${mode}: +${over.d}px ${over.offenders.join(',')}`);
   if (mode === 'light' && ['slate'].includes(style)) await p.screenshot({ path: `build/shots/m-${style}.png` });
   await p.close();

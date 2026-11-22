@@ -38,7 +38,7 @@ export function checkTheme(dir) {
   if (!meta.name || meta.name.length > 24) E('name is required (max 24 chars)');
   if (/^\s*todo/i.test(meta.blurb || '')) E('blurb still says TODO — write one friendly sentence about how the style feels');
   if (!meta.blurb || meta.blurb.length > 130) E('blurb is required (max 130 chars) — one friendly sentence on what the style feels like');
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(meta.released || '')) E('released must be YYYY-MM-DD');
+  if (!/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?$/.test(meta.released || '')) E('released must be YYYY-MM-DD (optionally with a time: YYYY-MM-DDTHH:MM)');
   if (!/^family=/.test(meta.fonts || '')) E('fonts must be a Google Fonts query, e.g. "family=Inter:wght@400;600"');
   for (const m of ['light', 'dark']) {
     if (!HEX.test(meta.accent?.[m] || '')) E(`accent.${m} must be a hex colour`);

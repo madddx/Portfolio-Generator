@@ -2,7 +2,7 @@
   "id": "swiss",
   "name": "Swiss",
   "blurb": "A modernist poster. Giant black headlines, hard rules and one red circle that ties it all together.",
-  "released": "2026-11-22",
+  "released": "2026-11-22T11:30",
   "order": 100,
   "fonts": "family=Archivo:wght@400;500;600;800",
   "accent": {

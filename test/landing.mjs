@@ -11,7 +11,8 @@ await pg.goto(url + '/index.html'); await pg.waitForSelector('.theme'); await pg
 ok(await pg.title() === 'Generate It!', 'tab title is "Generate It!"');
 ok(await pg.$$eval('link[rel~=icon]', l => l.length >= 2), 'favicon links present');
 for (const f of ['generate.html', 'gallery.html']) { const p2 = await ctx.newPage(); await p2.goto(url + '/' + f); ok(await p2.$$eval('link[rel~=icon]', l => l.length >= 2) && /Generate It!/.test(await p2.title()), f + ' has favicon and title: ' + await p2.title()); await p2.close(); }
-ok((await pg.$$('.picker button[aria-pressed]')).length === 7, 'one chip per theme');
+const nThemes = JSON.parse(fs.readFileSync('dist/themes/index.json', 'utf8')).themes.length;
+ok((await pg.$$('.picker button[aria-pressed]')).length === nThemes, 'one chip per theme (' + nThemes + ')');
 const style = () => pg.evaluate(() => document.querySelector('#frame').contentDocument.documentElement.getAttribute('data-style'));
 const s1 = await style(); await pg.waitForTimeout(4200); const s2 = await style(); ok(s1 && s2 && s1 !== s2, `stage cycles themes (${s1} → ${s2})`);
 await pg.click('.picker button:nth-of-type(3)'); await pg.waitForTimeout(500); const s3 = await style(); await pg.waitForTimeout(4200); ok(s3 === await style(), 'clicking a theme stops the autoplay (' + s3 + ')');

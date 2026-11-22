@@ -13,8 +13,8 @@ window.PFCatalog.ready(function () {
   seg(document.getElementById('device'), [['desktop', 'Desktop'], ['phone', 'Phone']], function () { return device; }, function (d) { device = d; document.body.classList.toggle('phone', d === 'phone'); previews.forEach(function (p) { p.setDevice(d); }); });
 
   PF.STYLES.forEach(function (s) {
-    var isNew = s.released && (Date.now() - new Date(s.released).getTime()) < 14 * 864e5, slot = h('div.gal-pv');
-    var card = h('article.gal-card', h('header', h('h2', { text: s.name }), isNew ? h('span.pill.new', { text: 'New' }) : null, h('span.gal-date', { text: 'Released ' + s.released })), slot, h('p', { text: s.blurb }), h('code', { text: s.id }));
+    var isNew = !!s.isNew, slot = h('div.gal-pv');
+    var card = h('article.gal-card', h('header', h('h2', { text: s.name }), isNew ? h('span.pill.new', { text: 'New' }) : null, h('span.gal-date', { text: 'Released ' + String(s.released).slice(0, 10) })), slot, h('p', { text: s.blurb }), h('code', { text: s.id }));
     grid.appendChild(card);
     var made = false, io = new IntersectionObserver(function (es) {
       if (!es[0].isIntersecting || made) return; made = true; io.disconnect();

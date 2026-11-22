@@ -2,7 +2,7 @@
   "id": "cinema",
   "name": "Cinema",
   "blurb": "A film title sequence. A full-screen opening still, credit-style headings and projects that scroll sideways like a film strip.",
-  "released": "2026-11-22",
+  "released": "2026-11-22T11:37",
   "order": 100,
   "fonts": "family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600",
   "accent": {

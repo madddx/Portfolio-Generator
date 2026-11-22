@@ -75,7 +75,7 @@
     var def = PF.STYLES.filter(function (s) { return s.id === id; })[0], c = def.swatch[mode];
     return (def.thumb || GENERIC_THUMB).replace(/\{bg\}/g, c[0]).replace(/\{ink\}/g, c[1]).replace(/\{ac\}/g, c[2]);
   }
-  function isNew(def) { return def.released && (Date.now() - new Date(def.released).getTime()) < 14 * 864e5; }
+  function isNew(def) { return !!def.isNew; }   // build.mjs marks the 3 most recently added themes
 
   var ACCENTS = ['#2563eb', '#7a4dff', '#db2777', '#e11d48', '#ea580c', '#d97706', '#16a34a', '#0d9488', '#0891b2', '#111827'];
 

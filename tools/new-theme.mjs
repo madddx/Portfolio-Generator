@@ -6,7 +6,7 @@ if (!id || !name) { console.error('Usage: npm run new-theme -- <id> "<Name>" [--
 if (!/^[a-z][a-z0-9-]{2,23}$/.test(id)) { console.error('The id must be 3–24 characters: lowercase letters, digits and hyphens, starting with a letter.'); process.exit(1); }
 const dest = path.join('themes', id); if (fs.existsSync(dest)) { console.error(`themes/${id} already exists.`); process.exit(1); }
 const srcDir = path.join('themes', from || '_template'); if (!fs.existsSync(srcDir)) { console.error(`themes/${from} doesn't exist.`); process.exit(1); }
-const today = new Date().toISOString().slice(0, 10);
+const today = new Date().toISOString().slice(0, 16);   // date + time, so themes added on the same day still sort in upload order
 fs.mkdirSync(dest, { recursive: true });
 for (const f of ['theme.json', 'theme.css', 'thumb.svg']) {
   let t = fs.readFileSync(path.join(srcDir, f), 'utf8');

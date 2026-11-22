@@ -14,10 +14,11 @@ const checks = checkAll('themes'); let failed = false;
 for (const r of checks) { if (r.errors.length) { failed = true; console.error(`✗ theme "${r.id}"`); r.errors.forEach(e => console.error('    ' + e)); } r.warnings.forEach(w => console.warn(`  warn ${r.id}: ${w}`)); }
 if (failed) { console.error('\nBuild stopped: fix the theme errors above (npm run check-themes).'); process.exit(1); }
 
-// 2. registry: newest first, then by "order", then by name
+// 2. registry: newest first (the first 3 get the "New" badge), then by "order", then by name
 const themes = checks.map(r => ({ meta: r.meta, css: R(`themes/${r.id}/theme.css`), thumb: R(`themes/${r.id}/thumb.svg`).trim() }))
   .sort((a, b) => b.meta.released.localeCompare(a.meta.released) || (a.meta.order ?? 100) - (b.meta.order ?? 100) || a.meta.name.localeCompare(b.meta.name));
-const styles = themes.map(t => ({ id: t.meta.id, name: t.meta.name, blurb: t.meta.blurb, released: t.meta.released, fonts: t.meta.fonts, accent: t.meta.accent, swatch: t.meta.swatch, thumb: t.thumb }));
+const NEW_COUNT = 3;   // only the newest few themes wear the "New" badge
+const styles = themes.map((t, i) => ({ id: t.meta.id, name: t.meta.name, blurb: t.meta.blurb, released: t.meta.released, isNew: i < NEW_COUNT, fonts: t.meta.fonts, accent: t.meta.accent, swatch: t.meta.swatch, thumb: t.thumb }));
 
 // 3. website template (build/site)
 fs.rmSync('build/site', { recursive: true, force: true }); fs.cpSync('src/site', 'build/site', { recursive: true });

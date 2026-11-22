@@ -6,7 +6,7 @@ window.PFCatalog.ready(function () {
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var base = window.PF_SAMPLE(); base.hero.typed = []; base.design.toggle = false;
   function el(tag, attrs, kids) { var e = document.createElement(tag); Object.keys(attrs || {}).forEach(function (k) { if (k === 'text') e.textContent = attrs[k]; else if (k === 'html') e.innerHTML = attrs[k]; else e.setAttribute(k, attrs[k]); }); (kids || []).forEach(function (c) { if (c) e.appendChild(c); }); return e; }
-  function isNew(s) { return s.released && (Date.now() - new Date(s.released).getTime()) < 14 * 864e5; }
+  function isNew(s) { return !!s.isNew; }   // build.mjs marks the 3 most recently added themes
   function art(s) { var c = s.swatch[mode]; return s.thumb.replace(/\{bg\}/g, c[0]).replace(/\{ink\}/g, c[1]).replace(/\{ac\}/g, c[2]); }
 
   // ── live stage ──
