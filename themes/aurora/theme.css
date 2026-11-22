@@ -1,0 +1,51 @@
+/* Aurora — glowing, technical, dark-first */
+:root[data-style="aurora"] {
+  --font-display: 'Syne', system-ui, sans-serif; --font-body: 'DM Sans', system-ui, sans-serif; --font-mono: 'DM Mono', ui-monospace, monospace;
+  --radius: 18px; --radius-sm: 10px; --card-pad: 1.5rem;
+}
+:root[data-style="aurora"][data-mode="dark"] {
+  --bg: #070b12; --bg-alt: #0a1019; --surface: #0f1722; --surface-2: #152131; --border: rgba(160, 190, 230, .12);
+  --text: #b6c3d8; --text-2: #8191a9; --heading: #f2f6fc; --accent: #2ad4ff; --accent-ink: #03141c; --accent-text: var(--accent);
+  --glow: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+:root[data-style="aurora"][data-mode="light"] {
+  --bg: #f3f6fb; --bg-alt: #e9eff7; --surface: #ffffff; --surface-2: #e4ecf6; --border: #d3deec;
+  --text: #34445b; --text-2: #5d6e87; --heading: #0d1b2e; --accent: #0b6fd6; --accent-ink: #ffffff; --accent-text: var(--accent);
+  --glow: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+[data-style="aurora"] body { background: var(--bg); }
+[data-style="aurora"] .hero { position: relative; overflow: hidden; isolation: isolate; }
+[data-style="aurora"] .hero::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px; opacity: .55;
+  -webkit-mask-image: radial-gradient(ellipse 70% 75% at 70% 40%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 70% 75% at 70% 40%, #000 20%, transparent 75%);
+}
+[data-style="aurora"] .hero::after {
+  content: ''; position: absolute; z-index: -1; width: 640px; height: 640px; right: -140px; top: -160px; border-radius: 50%;
+  background: radial-gradient(circle, var(--glow), transparent 68%);
+}
+[data-style="aurora"] .hero-name { font-weight: 800; letter-spacing: -.035em; }
+[data-style="aurora"] .hero-role { font-family: var(--font-mono); font-size: 1.05rem; font-weight: 400; }
+[data-style="aurora"] .hero-role::before { content: '> '; opacity: .6; }
+[data-style="aurora"] .hero-photo {
+  padding: 3px; border-radius: 26px; background: linear-gradient(145deg, var(--accent), transparent 55%, var(--accent));
+  box-shadow: 0 30px 80px -30px var(--glow);
+}
+[data-style="aurora"] .hero-photo img, [data-style="aurora"] .hero-photo--mono { border-radius: 23px; }
+[data-style="aurora"] .hero-photo--mono { background: var(--surface); }
+[data-style="aurora"] .hero-photo:not(.hero-photo--mono) img { background: var(--surface); }
+[data-style="aurora"] .badge { font-family: var(--font-mono); font-size: .74rem; background: var(--surface); }
+[data-style="aurora"] .btn--primary { box-shadow: 0 8px 28px -8px var(--accent); }
+[data-style="aurora"] .nav-links a { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .02em; }
+[data-style="aurora"] .section:nth-of-type(even) { background: var(--bg-alt); }
+[data-style="aurora"] .sec-title { font-weight: 800; display: flex; align-items: center; gap: 1rem; }
+[data-style="aurora"] .sec-title::after { content: ''; flex: 1; max-width: 160px; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); }
+[data-style="aurora"] .proj-card, [data-style="aurora"] .edu-item, [data-style="aurora"] .cert-card, [data-style="aurora"] .award, [data-style="aurora"] .link-card, [data-style="aurora"] .pub, [data-style="aurora"] .contact-form { transition: border-color .2s, box-shadow .2s, transform .2s; }
+[data-style="aurora"] .proj-card:hover, [data-style="aurora"] a.cert-card:hover, [data-style="aurora"] a.award:hover, [data-style="aurora"] a.link-card:hover, [data-style="aurora"] a.pub:hover { border-color: var(--accent); box-shadow: 0 18px 50px -24px var(--glow); transform: translateY(-3px); text-decoration: none; }
+[data-style="aurora"] .tl-item::before { box-shadow: 0 0 0 4px var(--bg), 0 0 16px var(--accent); }
+[data-style="aurora"] .section:nth-of-type(even) .tl-item::before { box-shadow: 0 0 0 4px var(--bg-alt), 0 0 16px var(--accent); }
+[data-style="aurora"] .timeline { border-left-color: color-mix(in srgb, var(--accent) 35%, var(--border)); }
+[data-style="aurora"] .tl-period, [data-style="aurora"] .pub-year, [data-style="aurora"] .ci-label { font-family: var(--font-mono); }
+[data-style="aurora"] .chip { background: var(--surface); }
+[data-style="aurora"] .chip--skill:hover { border-color: var(--accent); }

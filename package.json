@@ -1,0 +1,30 @@
+{
+  "name": "portfolio-generator",
+  "version": "1.0.0",
+  "description": "Client-side portfolio website generator with an admin editor",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node tools/watch.mjs",
+    "new-theme": "node tools/new-theme.mjs",
+    "check-themes": "node tools/check-themes.mjs",
+    "test": "node test/e2e.mjs"
+  },
+  "dependencies": {
+    "jszip": "^3.10.2"
+  },
+  "private": true,
+  "devDependencies": {
+    "@fontsource/bricolage-grotesque": "^5.3.0",
+    "@fontsource/dm-mono": "^5.3.0",
+    "@fontsource/dm-sans": "^5.3.0",
+    "@fontsource/instrument-sans": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/manrope": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "@fontsource/space-mono": "^5.3.0",
+    "@fontsource/syne": "^5.3.0",
+    "@fortawesome/fontawesome-free": "^6.5.0"
+  }
+}

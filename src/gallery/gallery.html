@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio themes</title>
+<!--@tool.css-->
+<style>
+  body { height: auto; }
+  .gal-top { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.25rem; padding: .8rem 1.25rem; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .gal-top h1 { margin: 0; font-size: 17px; } .gal-top .count { color: var(--muted); }
+  .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap: 1.5rem; padding: 1.5rem 1.25rem 3rem; max-width: 1500px; margin: 0 auto; }
+  body.phone .gal-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+  .gal-card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: grid; align-content: start; }
+  .gal-card header { display: flex; align-items: center; gap: .6rem; padding: .8rem 1rem; }
+  .gal-card h2 { margin: 0; font-size: 16px; } .gal-date { margin-left: auto; color: var(--muted); font-size: 12.5px; }
+  .gal-pv .pv-stage { aspect-ratio: 16 / 10; background: var(--bg); border-block: 1px solid var(--line); }
+  body.phone .gal-pv .pv-stage { aspect-ratio: 3 / 4; }
+  .gal-card p { margin: 0; padding: .8rem 1rem .3rem; color: var(--muted); } .gal-card code { margin: .3rem 1rem 1rem; justify-self: start; }
+</style>
+</head>
+<body>
+<div class="gal-top">
+  <h1>Portfolio themes</h1><span class="count" id="count"></span><span class="top-spacer"></span>
+  <div class="seg" id="mode" role="radiogroup" aria-label="Colour mode"></div>
+  <div class="seg" id="device" role="radiogroup" aria-label="Device"></div>
+</div>
+<main class="gal-grid" id="grid"></main>
+<!--@schema.js-->
+<!--@editor.js-->
+<!--@preview.js-->
+<!--@sample.js-->
+<!--@assemble.js-->
+<!--@templates-->
+<!--@catalog.js-->
+<!--@gallery.js-->
+</body>
+</html>

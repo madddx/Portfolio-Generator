@@ -1,0 +1,24 @@
+{
+  "id": "bloom",
+  "name": "Bloom",
+  "blurb": "Soft, round and friendly. Pastel surfaces with a centred introduction.",
+  "released": "2026-11-01",
+  "order": 4,
+  "fonts": "family=Bricolage+Grotesque:opsz,wght@12..96,500;700;800&family=Manrope:wght@400;500;600;700",
+  "accent": {
+    "light": "#7a4dff",
+    "dark": "#b79cff"
+  },
+  "swatch": {
+    "light": [
+      "#fbf4ff",
+      "#2a1f45",
+      "#7a4dff"
+    ],
+    "dark": [
+      "#171128",
+      "#f1eaff",
+      "#b79cff"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio generator</title>
+<meta name="description" content="Build a personal portfolio website in minutes. Pick a style, fill in your details, download a ready-to-publish site.">
+<!--@tool.css-->
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><i aria-hidden="true"></i>Portfolio generator</div>
+    <details class="menu" id="menu">
+      <summary class="btn sm ghost">Project ▾</summary>
+      <div class="menu-pop">
+        <button type="button" id="m-sample">Fill with sample content</button>
+        <button type="button" id="m-import">Open my site (.zip) or project…</button>
+        <button type="button" id="m-backup">Save project file</button>
+        <button type="button" id="m-reset">Start over</button>
+      </div>
+    </details>
+    <input type="file" id="import-file" accept=".zip,.js,.json,application/zip,application/json,text/javascript" hidden>
+    <span class="top-spacer"></span>
+    <span class="status hide-sm" id="status" role="status"></span>
+    <button type="button" class="btn sm preview-toggle" id="pv-toggle">Preview</button>
+    <button type="button" class="btn primary" id="go-download">Download site</button>
+  </header>
+  <div class="workspace">
+    <div id="editor" style="display:contents"></div>
+    <div id="preview" style="display:contents"></div>
+  </div>
+</div>
+<!--@jszip-->
+<!--@schema.js-->
+<!--@editor.js-->
+<!--@preview.js-->
+<!--@sample.js-->
+<!--@assemble.js-->
+<!--@templates-->
+<!--@catalog.js-->
+<!--@generator.js-->
+</body>
+</html>

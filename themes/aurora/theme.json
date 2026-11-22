@@ -1,0 +1,24 @@
+{
+  "id": "aurora",
+  "name": "Aurora",
+  "blurb": "Glowing, technical and dark-first. A grid of light behind a rounded profile card.",
+  "released": "2026-11-01",
+  "order": 1,
+  "fonts": "family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500",
+  "accent": {
+    "light": "#0b6fd6",
+    "dark": "#2ad4ff"
+  },
+  "swatch": {
+    "light": [
+      "#f2f6fb",
+      "#0d1b2e",
+      "#0b6fd6"
+    ],
+    "dark": [
+      "#070b12",
+      "#e8eef8",
+      "#2ad4ff"
+    ]
+  }
+}

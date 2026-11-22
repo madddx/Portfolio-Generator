@@ -1,0 +1,24 @@
+{
+  "id": "terminal",
+  "name": "Terminal",
+  "blurb": "Everything in monospace, each section a shell window. For people who live in the console.",
+  "released": "2026-11-01",
+  "order": 5,
+  "fonts": "family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400",
+  "accent": {
+    "light": "#0a7d3b",
+    "dark": "#4ade80"
+  },
+  "swatch": {
+    "light": [
+      "#eef2ec",
+      "#14231a",
+      "#0a7d3b"
+    ],
+    "dark": [
+      "#0a0f0c",
+      "#d6f5df",
+      "#4ade80"
+    ]
+  }
+}

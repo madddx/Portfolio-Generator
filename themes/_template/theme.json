@@ -1,0 +1,13 @@
+{
+  "id": "__ID__",
+  "name": "__NAME__",
+  "blurb": "TODO: one friendly sentence about how this style feels.",
+  "released": "__DATE__",
+  "order": 100,
+  "fonts": "family=Inter:wght@400;500;600;700",
+  "accent": { "light": "#2563eb", "dark": "#7aa2ff" },
+  "swatch": {
+    "light": ["#f6f7f9", "#14161c", "#2563eb"],
+    "dark": ["#0f1115", "#eceef3", "#7aa2ff"]
+  }
+}

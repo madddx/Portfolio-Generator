@@ -1,0 +1,24 @@
+{
+  "id": "brutal",
+  "name": "Brutal",
+  "blurb": "Thick outlines, hard shadows and flat colour. Loud on purpose.",
+  "released": "2026-11-01",
+  "order": 3,
+  "fonts": "family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700",
+  "accent": {
+    "light": "#ffd23f",
+    "dark": "#ffd23f"
+  },
+  "swatch": {
+    "light": [
+      "#fffdf5",
+      "#111111",
+      "#ffd23f"
+    ],
+    "dark": [
+      "#111111",
+      "#fffdf5",
+      "#ffd23f"
+    ]
+  }
+}

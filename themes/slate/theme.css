@@ -1,0 +1,66 @@
+/* Slate — clean and professional: every section is a tidy panel on a soft grey page, like a well-kept profile.
+
+   RULES (npm run check-themes enforces them):
+   1. Scope EVERY selector under [data-style="slate"].  2. Define BOTH colour modes.  3. Name @keyframes "slate-…". */
+
+:root[data-style="slate"] {
+  --font-display: 'Inter', system-ui, sans-serif; --font-body: 'Inter', system-ui, sans-serif;
+  --radius: 14px; --radius-sm: 8px; --radius-pill: 7px; --maxw: 920px; --card-pad: 1.15rem; --section-pad: 0px;
+}
+:root[data-style="slate"][data-mode="light"] {
+  --bg: #eceff4; --bg-alt: #eceff4; --surface: #ffffff; --surface-2: #f3f5f9; --border: #dbe0e9;
+  --text: #2b3340; --text-2: #525d70; --heading: #0f1722; --accent: #1f5fe0; --accent-ink: #ffffff;
+}
+:root[data-style="slate"][data-mode="dark"] {
+  --bg: #0e1217; --bg-alt: #0e1217; --surface: #161b22; --surface-2: #1c222b; --border: #262e3a;
+  --text: #c3ccd9; --text-2: #97a3b6; --heading: #f1f4f9; --accent: #6ea1ff; --accent-ink: #07121f;
+}
+
+/* chrome */
+[data-style="slate"] body { font-size: .97rem; line-height: 1.6; }
+[data-style="slate"] .site-nav { background: var(--surface); backdrop-filter: none; }
+[data-style="slate"] .brand-mark { border-radius: 7px; }
+[data-style="slate"] .brand-name { font-weight: 650; letter-spacing: -.01em; }
+[data-style="slate"] .nav-links a { font-weight: 500; font-size: .86rem; }
+[data-style="slate"] .btn { border-radius: var(--radius-sm); font-weight: 600; }
+[data-style="slate"] .social { border-radius: var(--radius-sm); background: var(--surface-2); border-color: transparent; }
+
+/* the signature: every block of the page is a panel */
+[data-style="slate"] main { max-width: var(--maxw); margin: 1.25rem auto 0; padding: 0 1rem; display: grid; gap: 1rem; }
+[data-style="slate"] .hero, [data-style="slate"] .section, [data-style="slate"] .section:nth-of-type(even) {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0;
+}
+[data-style="slate"] .hero-inner, [data-style="slate"] .section-inner { max-width: none; padding: 1.7rem 1.8rem; }
+[data-style="slate"] .sec-title { font-size: 1.12rem; font-weight: 700; letter-spacing: -.01em; margin-bottom: 1.2rem; padding-bottom: .8rem; border-bottom: 1px solid var(--border); }
+
+/* hero reads like a profile header */
+@media (min-width: 821px) {
+  [data-style="slate"] .hero-inner { grid-template-columns: 168px minmax(0, 1fr); gap: 1.8rem; align-items: start; }
+  [data-style="slate"] .hero-photo { order: -1; justify-self: start; width: 168px; max-width: none; aspect-ratio: 1; border-radius: 16px; }
+}
+[data-style="slate"] .hero { padding-top: 0; padding-bottom: 0; }
+[data-style="slate"] .hero-photo { border: 1px solid var(--border); }
+[data-style="slate"] .hero-name { font-size: clamp(2rem, 5vw, 2.7rem); font-weight: 700; letter-spacing: -.03em; }
+[data-style="slate"] .hero-role { margin-top: .35rem; color: var(--text-2); font-weight: 500; font-size: 1.1rem; }
+[data-style="slate"] .hero-bio { margin-top: .9rem; font-size: 1rem; max-width: 62ch; }
+[data-style="slate"] .hero-kicker { margin: 0 0 .5rem; font-size: .88rem; }
+[data-style="slate"] .hero-stats { margin-top: 1.2rem; padding-top: 1.1rem; border-top: 1px solid var(--border); gap: 1rem 2.2rem; }
+[data-style="slate"] .hero-stats dd { font-size: 1.5rem; font-weight: 700; }
+[data-style="slate"] .hero-cta { margin-top: 1.3rem; }
+
+/* inner cards are quieter than the panels around them */
+[data-style="slate"] .proj-card, [data-style="slate"] .edu-item, [data-style="slate"] .cert-card, [data-style="slate"] .award,
+[data-style="slate"] .link-card, [data-style="slate"] .pub, [data-style="slate"] .contact-form { background: var(--surface-2); border-color: var(--border); box-shadow: none; }
+[data-style="slate"] a.cert-card:hover, [data-style="slate"] a.award:hover, [data-style="slate"] a.link-card:hover, [data-style="slate"] a.pub:hover { border-color: var(--accent-text); text-decoration: none; }
+[data-style="slate"] .proj-card { transition: border-color .15s; } [data-style="slate"] .proj-card:hover { border-color: var(--accent-text); }
+[data-style="slate"] .chip { background: var(--surface-2); border-color: var(--border); }
+[data-style="slate"] .tags li { background: var(--surface); border: 1px solid var(--border); color: var(--text-2); font-weight: 500; }
+[data-style="slate"] .badge { background: var(--accent-soft); border-color: transparent; color: var(--accent-text); font-weight: 600; }
+[data-style="slate"] .tl-item::before, [data-style="slate"] .section:nth-of-type(even) .tl-item::before { box-shadow: 0 0 0 4px var(--surface); }
+[data-style="slate"] .timeline { border-left-color: var(--border); }
+[data-style="slate"] .tl-role { font-size: 1.05rem; font-weight: 650; }
+[data-style="slate"] .link-icon, [data-style="slate"] .ci-icon { border-radius: var(--radius-sm); }
+[data-style="slate"] .cert-logo, [data-style="slate"] .edu-logo { border-radius: var(--radius-sm); }
+[data-style="slate"] .contact-form input, [data-style="slate"] .contact-form textarea { background: var(--surface); }
+[data-style="slate"] .site-footer { border-top: 0; margin-top: 1rem; }
+@media (max-width: 600px) { [data-style="slate"] .hero-inner, [data-style="slate"] .section-inner { padding: 1.3rem 1.15rem; } [data-style="slate"] main { padding: 0 .6rem; } }

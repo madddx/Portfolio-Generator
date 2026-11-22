@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install --omit=dev",
+  "headers": [
+    { "source": "/themes/(.*)", "headers": [
+      { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" },
+      { "key": "Access-Control-Allow-Origin", "value": "*" } ] }
+  ]
+}

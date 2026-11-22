@@ -1,0 +1,41 @@
+/* __NAME__ — say in one line what makes this style different.
+
+   RULES (npm run check-themes enforces them):
+   1. Scope EVERY selector under [data-style="__ID__"] so it can't leak into other themes.
+   2. Define BOTH colour modes below. Text needs 4.5:1 contrast against its background.
+   3. Name any @keyframes "__ID__-something".
+
+   THE MARKUP YOU CAN STYLE (built by src/site/js/renderer.js)
+   header.site-nav > .nav-inner > a.brand (.brand-mark .brand-name) · nav.nav-links > a · .nav-tools
+   section.hero > .hero-inner > .hero-text (.hero-kicker h1.hero-name .hero-role .hero-bio .badges .hero-stats .hero-cta .hero-socials) + figure.hero-photo
+   section.section.section--about|experience|projects|skills|education|certifications|publications|awards|learning|links|contact
+        > .section-inner > h2.sec-title + .sec-body
+   cards  .proj-card .edu-item .cert-card .award .link-card .pub .contact-form   ·   .chip .tags li .badge   ·   .timeline .tl-item
+   Open src/site/css/base.css to see the neutral defaults you are overriding. */
+
+/* 1 ─ Tokens: fonts and shape (shared by both modes) */
+:root[data-style="__ID__"] {
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --radius: 12px; --radius-sm: 8px; --radius-pill: 999px;
+  /* also available: --maxw --card-pad --shadow --section-pad --nav-h */
+}
+
+/* 2 ─ Tokens: colours, one block per mode */
+:root[data-style="__ID__"][data-mode="light"] {
+  --bg: #f6f7f9; --bg-alt: #f6f7f9; --surface: #ffffff; --surface-2: #eef0f4; --border: #dde1e8;
+  --text: #2d313c; --text-2: #5b6272; --heading: #14161c;
+  --accent: #2563eb; --accent-ink: #ffffff;
+}
+:root[data-style="__ID__"][data-mode="dark"] {
+  --bg: #0f1115; --bg-alt: #0f1115; --surface: #161920; --surface-2: #1d2029; --border: #272b36;
+  --text: #b9bfcc; --text-2: #8d94a6; --heading: #eceef3;
+  --accent: #7aa2ff; --accent-ink: #0b1020;
+}
+
+/* 3 ─ Your signature. Pick ONE memorable move (a hero layout, a heading treatment, a card style)
+       and keep everything else quiet. Examples to adapt: */
+
+/* [data-style="__ID__"] .hero-name { font-size: clamp(3rem, 8vw, 6rem); letter-spacing: -.04em; } */
+/* [data-style="__ID__"] .sec-title { text-transform: lowercase; } */
+/* [data-style="__ID__"] .proj-card { border-width: 2px; box-shadow: 6px 6px 0 var(--border); } */

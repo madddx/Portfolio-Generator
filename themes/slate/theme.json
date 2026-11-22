@@ -1,0 +1,13 @@
+{
+  "id": "slate",
+  "name": "Slate",
+  "blurb": "Clean and professional. Each section is a tidy panel on a soft grey page, like a well-kept profile.",
+  "released": "2026-11-22",
+  "order": 100,
+  "fonts": "family=Inter:wght@400;500;600;700",
+  "accent": { "light": "#1f5fe0", "dark": "#6ea1ff" },
+  "swatch": {
+    "light": ["#eceff4", "#0f1722", "#1f5fe0"],
+    "dark": ["#0e1217", "#f1f4f9", "#6ea1ff"]
+  }
+}

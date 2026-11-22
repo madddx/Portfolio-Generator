@@ -1,0 +1,10 @@
+import fs from 'node:fs'; import path from 'node:path';
+import { createRequire } from 'node:module'; const { chromium } = createRequire(import.meta.url)('playwright');
+import { serve, installAssetRoutes } from './helpers.mjs';
+const root = path.resolve('build/site-test'); const { srv, url } = await serve(root);
+const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 1280, height: 800 } }); await installAssetRoutes(ctx);
+const p = await ctx.newPage(); p.on('console', m => console.log('console:', m.text().slice(0, 200)));
+await p.goto(url + '/index.html'); await p.waitForSelector('.hero-name'); await p.waitForTimeout(600);
+console.log(JSON.stringify(await p.evaluate(() => [...document.querySelectorAll('.cert-logo img, .edu-logo img')].map(i => ({ src: i.src.slice(0, 40), len: i.src.length, done: i.complete, nw: i.naturalWidth, w: Math.round(i.getBoundingClientRect().width), h: Math.round(i.getBoundingClientRect().height) })))));
+console.log(await p.evaluate(() => { const d = window.PORTFOLIO_DATA; return [d.certifications[0].img.slice(0, 50), d.certifications[0].img.length]; }));
+srv.close(); await b.close();

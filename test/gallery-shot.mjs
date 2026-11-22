@@ -1,0 +1,10 @@
+import path from 'node:path';
+import { createRequire } from 'node:module'; const { chromium } = createRequire(import.meta.url)('playwright');
+import { installAssetRoutes } from './helpers.mjs';
+const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 1440, height: 1000 } }); await installAssetRoutes(ctx);
+const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+await p.goto('file://' + path.resolve('dist/gallery.html')); await p.waitForSelector('.gal-card'); await p.waitForTimeout(2500);
+const n = await p.locator('.gal-card').count(); const frames = await p.locator('iframe').count();
+await p.screenshot({ path: 'build/shots/gallery.png' });
+await p.click('#mode button:has-text("Dark")'); await p.waitForTimeout(1200); await p.screenshot({ path: 'build/shots/gallery-dark.png' });
+console.log('cards', n, 'previews loaded', frames, errs.length ? 'ERRORS ' + errs.join('|') : 'no errors'); await b.close();
