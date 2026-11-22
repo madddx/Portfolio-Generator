@@ -1,0 +1,102 @@
+/* Swiss — a poster. Huge tight headlines, one red circle repeated on purpose, hard black rules,
+   and a layout where each section title sits in its own column beside the content. */
+
+:root[data-style="swiss"] {
+  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --radius: 0px; --radius-sm: 0px; --radius-pill: 0px;
+  --maxw: 1180px; --card-pad: 1.1rem; --section-pad: clamp(3rem, 7vw, 5.5rem);
+}
+:root[data-style="swiss"][data-mode="light"] {
+  --bg: #f5f5f2; --bg-alt: #f5f5f2; --surface: #ffffff; --surface-2: #e9e9e4; --border: #c9c9c2;
+  --text: #1c1c1c; --text-2: #4d4d4a; --heading: #0b0b0b;
+  --accent: #d02510; --accent-ink: #ffffff;
+}
+:root[data-style="swiss"][data-mode="dark"] {
+  --bg: #0d0d0d; --bg-alt: #0d0d0d; --surface: #181818; --surface-2: #222222; --border: #3a3a3a;
+  --text: #dcdcd8; --text-2: #a4a4a0; --heading: #ffffff;
+  --accent: #ff5a3c; --accent-ink: #0d0d0d;
+}
+
+/* ── frame ── */
+[data-style="swiss"] body { letter-spacing: -.005em; }
+[data-style="swiss"] .site-nav { background: color-mix(in srgb, var(--bg) 94%, transparent); border-bottom: 3px solid var(--heading); }
+[data-style="swiss"] .brand { font-weight: 800; letter-spacing: -.03em; }
+[data-style="swiss"] .brand-mark { border-radius: 50%; min-width: 2rem; width: 2rem; padding: 0; font-size: .7rem; }
+[data-style="swiss"] .nav-links a { font-weight: 600; color: var(--text); }
+[data-style="swiss"] .icon-btn, [data-style="swiss"] .btn { border: 2px solid var(--heading); }
+[data-style="swiss"] .icon-btn:hover, [data-style="swiss"] .btn:hover { border-color: var(--accent-text); }
+
+/* ── hero ── */
+[data-style="swiss"] .hero { padding: clamp(2rem, 6vw, 4.5rem) 0 clamp(2.5rem, 5vw, 4rem); }
+[data-style="swiss"] .hero-inner { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); }
+[data-style="swiss"] .hero-kicker { color: var(--text); font-weight: 600; font-size: 1rem; }
+[data-style="swiss"] .hero-name { font-weight: 800; font-size: clamp(3rem, 8.4vw, 7.4rem); line-height: .88; letter-spacing: -.055em; }
+[data-style="swiss"] .hero-role { color: var(--heading); font-weight: 600; font-size: clamp(1.15rem, 2.2vw, 1.55rem); margin-top: 1.4rem; }
+[data-style="swiss"] .hero-bio { color: var(--text); font-size: 1.1rem; max-width: 46ch; }
+[data-style="swiss"] .badge { border: 2px solid var(--heading); color: var(--heading); font-weight: 600; }
+[data-style="swiss"] .hero-stats { border-top: 3px solid var(--heading); padding-top: 1.1rem; gap: 1rem 3rem; }
+[data-style="swiss"] .hero-stats dd { font-size: clamp(2.2rem, 4.4vw, 3.4rem); font-weight: 800; letter-spacing: -.04em; }
+[data-style="swiss"] .hero-stats dt { color: var(--text); font-weight: 500; }
+[data-style="swiss"] .btn--primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+[data-style="swiss"] .btn--primary:hover { color: var(--accent-ink); border-color: var(--heading); filter: none; }
+[data-style="swiss"] .social { border: 2px solid var(--heading); color: var(--heading); }
+
+/* the circle: the photo is cropped round and a red disc sits behind it, offset */
+[data-style="swiss"] .hero-photo { isolation: isolate; position: relative; overflow: visible; border-radius: 50%; aspect-ratio: 1; background: none; max-width: 380px; }
+[data-style="swiss"] .hero-photo img { border-radius: 50%; filter: grayscale(1) contrast(1.05); }
+[data-style="swiss"] .hero-photo::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: 50%; background: var(--accent); transform: translate(8%, 8%); animation: swiss-pop .7s cubic-bezier(.2, .8, .2, 1) both; }
+[data-style="swiss"] .hero-photo--mono { background: var(--heading); color: var(--bg); }
+@keyframes swiss-pop { from { transform: translate(0, 0) scale(.82); opacity: 0; } to { transform: translate(8%, 8%) scale(1); opacity: 1; } }
+@media (max-width: 820px) { [data-style="swiss"] .hero-photo { max-width: 200px; } [data-style="swiss"] .hero-name { font-size: clamp(2.8rem, 15vw, 5rem); } }
+
+/* ── sections: title in the left column, content on the right, a black rule on top ── */
+[data-style="swiss"] .section, [data-style="swiss"] .section:nth-of-type(even) { background: transparent; border-top: 3px solid var(--heading); }
+[data-style="swiss"] .section-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3.3fr); gap: 1.5rem clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+[data-style="swiss"] .sec-title { position: sticky; top: calc(var(--nav-h) + 1.25rem); margin: 0; font-size: clamp(1.45rem, 2.1vw, 1.95rem); font-weight: 800; letter-spacing: -.04em; line-height: 1; overflow-wrap: anywhere; }
+[data-style="swiss"] .sec-title::before { content: ''; display: block; width: .62em; height: .62em; margin-bottom: .6em; border-radius: 50%; background: var(--accent); }
+@media (max-width: 860px) {
+  [data-style="swiss"] .section-inner { grid-template-columns: 1fr; }
+  [data-style="swiss"] .sec-title { position: static; font-size: 2rem; }
+  [data-style="swiss"] .sec-title::before { display: inline-block; margin: 0 .35em 0 0; width: .5em; height: .5em; }
+}
+
+/* ── content: flat, ruled, no boxes ── */
+[data-style="swiss"] .proj-card, [data-style="swiss"] .edu-item, [data-style="swiss"] .cert-card, [data-style="swiss"] .award,
+[data-style="swiss"] .link-card, [data-style="swiss"] .pub { background: transparent; border: 0; border-top: 2px solid var(--heading); padding-left: 0; padding-right: 0; }
+[data-style="swiss"] .proj-card { padding: 0; gap: 0; }
+[data-style="swiss"] .proj-img { aspect-ratio: 16 / 10; background: var(--surface-2); }
+[data-style="swiss"] .proj-img img { filter: grayscale(1) contrast(1.05); transition: filter .35s; }
+[data-style="swiss"] .proj-card:hover .proj-img img { filter: none; }
+[data-style="swiss"] .proj-body { padding: 1rem 0 0; }
+[data-style="swiss"] .proj-body h3 { font-size: 1.5rem; font-weight: 800; letter-spacing: -.035em; }
+[data-style="swiss"] .proj-body p, [data-style="swiss"] .tl-bullets, [data-style="swiss"] .cert-text span, [data-style="swiss"] .award-text span, [data-style="swiss"] .link-text span, [data-style="swiss"] .pub-text span { color: var(--text); }
+[data-style="swiss"] .proj-grid { gap: 2.2rem 1.8rem; }
+[data-style="swiss"] a.cert-card:hover, [data-style="swiss"] a.award:hover, [data-style="swiss"] a.link-card:hover, [data-style="swiss"] a.pub:hover { border-top-color: var(--accent-text); }
+[data-style="swiss"] .cert-logo, [data-style="swiss"] .edu-logo { border-radius: 50%; border: 2px solid var(--heading); }
+[data-style="swiss"] .edu-item { gap: 1.1rem; }
+[data-style="swiss"] .edu-info h3, [data-style="swiss"] .tl-role { font-weight: 800; letter-spacing: -.03em; }
+[data-style="swiss"] .link-icon, [data-style="swiss"] .ci-icon { background: var(--heading); color: var(--bg); border-radius: 50%; }
+[data-style="swiss"] .pub-year { color: var(--accent-text); font-weight: 800; }
+
+/* timeline: just rows between rules */
+[data-style="swiss"] .timeline { border: 0; padding: 0; gap: 0; }
+[data-style="swiss"] .tl-item { padding: 1.3rem 0 1.5rem; border-top: 2px solid var(--heading); }
+[data-style="swiss"] .tl-item:first-child { border-top: 0; padding-top: 0; }
+[data-style="swiss"] .tl-item::before { display: none; }
+[data-style="swiss"] .tl-role { font-size: 1.5rem; }
+[data-style="swiss"] .tl-bullets li::before { border-radius: 50%; background: var(--accent); }
+[data-style="swiss"] .tl-period { color: var(--heading); font-weight: 600; }
+
+/* chips and tags: outlined, square */
+[data-style="swiss"] .chip { background: transparent; border: 2px solid var(--heading); font-weight: 500; }
+[data-style="swiss"] .chip i { color: var(--accent-text); }
+[data-style="swiss"] .tags li { background: transparent; border: 1.5px solid var(--heading); color: var(--heading); font-weight: 500; }
+[data-style="swiss"] .skill-group h3 { color: var(--heading); font-weight: 800; font-size: 1.05rem; letter-spacing: -.02em; }
+[data-style="swiss"] .facts div { border-bottom: 1px solid var(--heading); }
+[data-style="swiss"] .facts dt { color: var(--text-2); }
+
+/* contact */
+[data-style="swiss"] .contact-form { background: var(--surface); border: 2px solid var(--heading); box-shadow: 8px 8px 0 var(--accent); }
+[data-style="swiss"] .contact-form input, [data-style="swiss"] .contact-form textarea { border: 2px solid var(--heading); background: var(--bg); }
+[data-style="swiss"] .site-footer { border-top: 3px solid var(--heading); }
